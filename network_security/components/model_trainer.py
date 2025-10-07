@@ -30,6 +30,10 @@ from sklearn.ensemble import (
 )
 from mlflow.models.signature import infer_signature
 
+import dagshub
+
+dagshub.init(repo_owner="TanmayBhaise", repo_name="network_security", mlflow=True)
+
 
 class ModelTrainer:
     def __init__(
@@ -67,8 +71,8 @@ class ModelTrainer:
                 }
                 mlflow.log_metrics(metrics)
                 mlflow.sklearn.log_model(
-                    best_model,
-                    name="model",
+                    sk_model=best_model,
+                    artifact_path="model",
                     signature=signature,
                     input_example=input_example,
                 )
@@ -147,6 +151,8 @@ class ModelTrainer:
         save_object(
             self.model_trainer_config.trained_model_file_path, obj=network_model
         )
+
+        save_object(self.model_trainer_config.final_model_file_path, best_model)
 
         ## Model Trainer Artifact
         model_trainer_artifact = ModelTrainerArtifact(

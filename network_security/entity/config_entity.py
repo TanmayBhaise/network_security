@@ -94,6 +94,10 @@ class DataTransformationConfig:
             training_pipeline.DATA_TRANSFORMATION_TRANSFORMED_OBJECT_DIR,
             training_pipeline.PREPROCESSING_OBJECT_FILE_NAME,
         )
+        self.final_model_file_path: str = os.path.join(
+            training_pipeline.FINAL_MODEL_DIR,
+            training_pipeline.PREPROCESSING_OBJECT_FILE_NAME,
+        )
 
 
 class ModelTrainerConfig:
@@ -110,4 +114,8 @@ class ModelTrainerConfig:
         self.expected_accuracy: float = training_pipeline.MODEL_TRAINER_EXPECTED_SCORE
         self.overfitting_underfitting_threshold = (
             training_pipeline.MODEL_TRAINER_OVER_FITTING_UNDER_FITTING_THRESHOLD
+        )
+        self.final_model_file_path: str = os.path.join(
+            training_pipeline.FINAL_MODEL_DIR,
+            training_pipeline.MODEL_FILE_NAME,
         )

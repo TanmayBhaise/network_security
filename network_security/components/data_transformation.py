@@ -98,7 +98,6 @@ class DataTransformation:
                 transformed_input_test_feature, np.array(target_features_test_df)
             ]
 
-
             ## save numpy array data
             save_numpy_array_data(
                 self.data_transformation_config.transformed_train_file_path,
@@ -112,12 +111,16 @@ class DataTransformation:
                 self.data_transformation_config.transformed_object_file_path,
                 preprocessor_object,
             )
+            save_object(
+                self.data_transformation_config.final_model_file_path,
+                preprocessor_object,
+            )
 
             ## preparing artifact
             data_transformation_artifact = DataTransformationArtifact(
                 transformed_object_file_path=self.data_transformation_config.transformed_object_file_path,
                 transformed_train_file_path=self.data_transformation_config.transformed_train_file_path,
-                transformed_test_file_path=self.data_transformation_config.transformed_test_file_path
+                transformed_test_file_path=self.data_transformation_config.transformed_test_file_path,
             )
 
             return data_transformation_artifact
